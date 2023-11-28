@@ -1,0 +1,16 @@
+apiVersion: v1
+data:   
+  MODE : 'development'
+  VITE_BASE_URL : 'https://zillow56.p.rapidapi.com'
+  VITE_RAPID_API_API_KEY : 'd38a897067msh177e9d548447596p19ff5fjsn5cdcdd27813a'
+  VITE_RAPID_API_HOST : 'zillow56.p.rapidapi.com'
+  VITE_MOCK_IA : '1' 
+  VITE_IA_API_URL : 'http://34.170.66.203:8000/model' 
+
+kind: ConfigMap
+metadata:  
+  labels:
+    app: upper-fixer
+    stack: apis
+  name: upper-fixer-env
+  namespace: default

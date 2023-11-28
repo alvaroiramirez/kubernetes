@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fixer-upper-svc
+  namespace: default
+  labels:
+    app: fixer-upper
+spec:
+  selector:
+    app: fixer-upper
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: 8080
+  type: LoadBalancer

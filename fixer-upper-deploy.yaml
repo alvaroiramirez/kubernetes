@@ -1,0 +1,26 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: fixer-upper
+spec:
+  replicas: 1
+  #number of replicas generated
+  selector:
+    #assigns labels to the pods for future selection
+    matchLabels:
+      app: fixer-upper
+      version: v01
+  template:
+    metadata:
+      labels:
+        app: fixer-upper
+        version: v01
+    spec:
+      containers:
+      - name: fixer-upper
+        image: alvaroiramirez/fixer-upper:latest
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: upper-fixer-env
