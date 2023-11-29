@@ -1,0 +1,60 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: fixer-upper
+spec:
+  replicas: 1
+  #number of replicas generated
+  selector:
+    #assigns labels to the pods for future selection
+    matchLabels:
+      app: fixer-upper
+      version: v01
+  template:
+    metadata:
+      labels:
+        app: fixer-upper
+        version: v01
+    spec:
+      containers:
+      - name: fixer-upper
+        image: alvaroiramirez/fixer-upper:latest
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: upper-fixer-env
+---
+
+apiVersion: v1
+data:   
+  MODE : 'development'
+  VITE_BASE_URL : 'https://zillow56.p.rapidapi.com'
+  VITE_RAPID_API_API_KEY : 'd38a897067msh177e9d548447596p19ff5fjsn5cdcdd27813a'
+  VITE_RAPID_API_HOST : 'zillow56.p.rapidapi.com'
+  VITE_MOCK_IA : '1' 
+  VITE_IA_API_URL : 'http://34.170.66.203:8000/model' 
+
+kind: ConfigMap
+metadata:  
+  labels:
+    app: upper-fixer
+  name: upper-fixer-env
+  namespace: default
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fixer-upper-svc
+  namespace: default
+  labels:
+    app: fixer-upper
+spec:
+  selector:
+    app: fixer-upper
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
