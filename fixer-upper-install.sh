@@ -1,26 +1,26 @@
 #!/bin/bash
-#kubectl apply -f https://github.com/alvaroiramirez/kubernetes/raw/master/fixer-upper-all.yaml
-# Replace 'your-github-username', 'your-github-repo', and 'path/to/your/file.yaml' with the actual GitHub details
-GITHUB_USERNAME="alvaroiramirez"
-GITHUB_REPO="kubernetes"
-FILE_PATH="fixer-upper-all.yaml"
+# kubectl apply -f https://github.com/alvaroiramirez/kubernetes/raw/master/fixer-upper-all.yaml
+
+GITHUB_USERNAME="alvaroiramirez"  # Replace with Tony's GitHub username
+GITHUB_REPO="kubernetes"          # Replace with the name of Tony's GitHub repo
+FILE_PATH="fixer-upper-all.yaml"  # yaml file path
 
 # Set the Kubernetes namespace (if applicable)
 NAMESPACE="default"
 
 # GitHub raw content URL
-RAW_URL="https://raw.githubusercontent.com/$GITHUB_USERNAME/$GITHUB_REPO/master/$FILE_PATH"
+RAW_URL="https://raw.githubusercontent.com/$GITHUB_USERNAME/$GITHUB_REPO/master/$FILE_PATH"   # Replace with main branch if reading from Tony's repo or master branch if Alvaro's repo
 
 # Fetch the YAML file
-kubectl apply -f $RAW_URL -n $NAMESPACE
+kubectl apply -f $RAW_URL -n $NAMESPACE       # Execute yaml file
 
 # Check the status of the applied resources
-kubectl get all -n $NAMESPACE
+kubectl get all -n $NAMESPACE            
 
 
-# get the load balancer ip address 
-
-# Replace 'your-service-name' with the name of your Kubernetes service
+# GET THE LOAD BALANCER IP ADDRESS
+# --------------------------------
+# Name of the Kubernetes service as defined in yaml
 SERVICE_NAME="fixer-upper-svc"
 
 # Set the maximum number of attempts
@@ -49,3 +49,13 @@ done
 if [ $attempts -eq $MAX_ATTEMPTS ]; then
   echo "Timed out. External IP address not obtained after $((MAX_ATTEMPTS * DELAY_SECONDS)) seconds."
 fi
+
+
+# TO EXECUTE THE SCRIPT
+# ---------------------
+
+# set execution permissions
+# chmod +x fixer-upper-install.sh 
+
+# execute the script
+# ./fixer-upper-install.sh

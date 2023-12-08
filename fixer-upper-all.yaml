@@ -1,60 +1,57 @@
-kind: Deployment
-apiVersion: apps/v1
+# CREATE POD
+kind: Deployment                    # Define object type as deployment
+apiVersion: apps/v1                 # Define API version
 metadata:
-  name: fixer-upper
+  name: fixer-upper                 # Name of deployment
 spec:
-  replicas: 1
-  #number of replicas generated
+  replicas: 1                       # Number of replicas generated - Number of pods running
   selector:
-    #assigns labels to the pods for future selection
-    matchLabels:
-      app: fixer-upper
-      version: v01
+    matchLabels:                    # Assigns labels to the pods for future selection
+      app: fixer-upper              # Label for deployment - Match selector: app: fixer-upper in line 52
   template:
     metadata:
       labels:
-        app: fixer-upper
-        version: v01
+        app: fixer-upper            # Label for pod
     spec:
       containers:
-      - name: fixer-upper
-        image: alvaroiramirez/fixer-upper:latest
+      - name: fixer-upper           # Name of container
+        image: alvaroiramirez/fixer-upper:latest  # image name in DockerHub
         ports:
-        - containerPort: 8080
-        envFrom:
+        - containerPort: 8080      # Port where pod will listen
+        envFrom:                   # Environment variables from configMap (line 26)
         - configMapRef:
-            name: upper-fixer-env
+            name: upper-fixer-env  # Name of configMap (line 39)
 ---
-
+# CREATE ENVIRONMENT VARIABLES
 apiVersion: v1
 data:   
   MODE : 'development'
   VITE_BASE_URL : 'https://zillow56.p.rapidapi.com'
   VITE_RAPID_API_API_KEY : 'd38a897067msh177e9d548447596p19ff5fjsn5cdcdd27813a'
   VITE_RAPID_API_HOST : 'zillow56.p.rapidapi.com'
-  VITE_MOCK_IA : '1' 
+  VITE_MOCK_IA : '1'          # 1 = Mock IA, 0 = Real IA
   VITE_IA_API_URL : 'http://34.170.66.203:8000/model' 
 
-kind: ConfigMap
+kind: ConfigMap               # Define object type as configMap - Contains environment variables
 metadata:  
   labels:
     app: upper-fixer
   name: upper-fixer-env
-  namespace: default
-
+  namespace: default          # Namespace where configMap will be created - Update if another namespace must be used
 ---
+# CREATE SERVICE OF TYPE LOAD BALANCER
 apiVersion: v1
-kind: Service
+kind: Service                 # Define object type as service - Exposes pod to the internet though a load balancer as defined in lines 53-57
 metadata:
-  name: fixer-upper-svc
+  name: fixer-upper-svc       # Name of service (Check line 24 in .sh file)
   namespace: default
   labels:
-    app: fixer-upper
+    app: fixer-upper          # Label for service
 spec:
   selector:
-    app: fixer-upper
+    app: fixer-upper          # Label for pod - Match selector: app: fixer-upper in line 14
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
-  type: LoadBalancer
+    - protocol: TCP           # Protocol used
+      port: 80                # Port exposed by service
+      targetPort: 8080        # Port where pod is listening
+  type: LoadBalancer          # Create load balancer in Google Cloud to have external access to the service
