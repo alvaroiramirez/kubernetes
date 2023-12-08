@@ -1,0 +1,28 @@
+# Work as root
+sudo su -
+
+# Install git
+apt-get install git
+
+# Exit root mode
+exit
+
+# Clone git with yaml and sh files
+git clone https://github.com/alvaroiramirez/kubernetes.git
+
+# Change to Kubernetes directory
+cd kubernetes
+
+# set execution permissions
+# chmod +x fixer-upper-install.sh 
+
+# execute the script
+# ./fixer-upper-install.sh
+
+
+
+TO REMOVE Kubernetes
+--------------------
+cd ..
+rm -rf kubernetes
+# Go back to line 11
