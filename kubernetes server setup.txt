@@ -1,0 +1,30 @@
+# 1. Generate Docker image
+# ------------------------
+1. Run DockerHub in your computer.
+2. Run the commands below. Note that 'fixer-upper' is the name of the image to be generated. Change it as needed:
+docker login
+docker build -t alvaroiramirez/fixer-upper:latest .
+docker push alvaroiramirez/fixer-upper:latest
+3. Make public in DockerHub
+
+
+# 2. Adjust yaml script
+# ---------------------
+1. Replace image name in line 18 in fixer-upper-all-yaml
+    image: alvaroiramirez/front-end:latest  # image name in DockerHub
+2. Push yaml file to repo (kubernetes project)
+
+
+# 3. Create VM
+# ------------
+1. Open GCP
+2. From the sandwich menu, select Kubernetes Engine / Clusters
+3. Click on Create
+4. Assign cluster name (i.e. ac215)
+5. From the three vertical dots, select Connect
+6. Click on RUN IN CLOUD SHELL
+7. In the Terminal opened in the previous step, click Enter if a gcloud... command is pre-written. Follow instructions if needed.
+8. Enter:
+cd kubernetes
+chmod +x fixer-upper-install.sh 
+./fixer-upper-install.sh

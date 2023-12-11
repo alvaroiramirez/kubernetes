@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: fixer-upper           # Name of container
-        image: alvaroiramirez/fixer-upper:latest  # image name in DockerHub
+        image: alvaroiramirez/front-end:latest  # image name in DockerHub
         ports:
         - containerPort: 8080      # Port where pod will listen
         envFrom:                   # Environment variables from configMap (line 26)
@@ -31,6 +31,10 @@ data:
   VITE_RAPID_API_HOST : 'zillow56.p.rapidapi.com'
   VITE_MOCK_IA : '0'          # 1 = Mock IA, 0 = Real IA
   VITE_IA_API_URL : 'http://34.170.66.203:8000/model' 
+  VITE_MAX_PHOTOS_TO_ANALIZE : '3'
+  VITE_MAX_PROPERTIES_PER_PAGE : '5'
+  VITE_USE_REAL_FIXER_UPPER_VALUE : '0'
+
 
 kind: ConfigMap               # Define object type as configMap - Contains environment variables
 metadata:  
