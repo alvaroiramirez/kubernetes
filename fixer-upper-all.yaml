@@ -26,9 +26,9 @@ spec:
 apiVersion: v1
 data:   
   MODE : 'development'
-  VITE_BASE_URL : 'https://zillow56.p.rapidapi.com'
+  VITE_BASE_URL : 'https://zillow-com4.p.rapidapi.com/v2'
   VITE_RAPID_API_API_KEY : 'd38a897067msh177e9d548447596p19ff5fjsn5cdcdd27813a'
-  VITE_RAPID_API_HOST : 'zillow56.p.rapidapi.com'
+  VITE_RAPID_API_HOST : 'zillow-com4.p.rapidapi.com'
   VITE_MOCK_IA : '0'          # 1 = Mock IA, 0 = Real IA
   VITE_IA_API_URL : 'http://34.170.66.203:8000/model' 
   VITE_MAX_PHOTOS_TO_ANALIZE : '3'

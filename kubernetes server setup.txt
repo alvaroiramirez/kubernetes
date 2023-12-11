@@ -25,6 +25,17 @@ docker push alvaroiramirez/fixer-upper:latest
 6. Click on RUN IN CLOUD SHELL
 7. In the Terminal opened in the previous step, click Enter if a gcloud... command is pre-written. Follow instructions if needed.
 8. Enter:
+ls   
+# If kubernetes folder exists
+    rm -rf kubernetes
+    # Obtain from GitHub the URL for kubernetes repo
+    git clone https://github.com/alvaroiramirez/kubernetes.git
 cd kubernetes
 chmod +x fixer-upper-install.sh 
 ./fixer-upper-install.sh
+
+
+If pod not created correctly:
+kubectl get pods   # Show pod state 
+kubectl delete pod {pod name}   # Delete pod and starts a new one
+kubectl get pods   # To verify new pod is running
