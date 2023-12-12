@@ -20,10 +20,11 @@ docker push alvaroiramirez/fixer-upper:latest
 1. Open GCP
 2. From the sandwich menu, select Kubernetes Engine / Clusters
 3. Click on Create
-4. Assign cluster name (i.e. ac215)
-5. From the three vertical dots, select Connect
+4. Assign cluster name (i.e. c5-front-end)
+5. Once created, select Connect from the three vertical dots
 6. Click on RUN IN CLOUD SHELL
-7. In the Terminal opened in the previous step, click Enter if a gcloud... command is pre-written. Follow instructions if needed.
+7. In the Terminal opened in the previous step, click Enter if a 
+   gcloud... command is pre-written. Follow instructions if needed.
 8. Enter:
 ls   
 # If kubernetes folder exists
